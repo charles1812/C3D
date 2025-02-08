@@ -1,0 +1,15 @@
+C 64,63,65
+F 33,31,32
+
+EA src/map/red_brick.xpm
+SO src/map/green_brick.xpm
+NO src/map/yellow_brick.xpm
+WE src/map/blue2_brick.xpm
+
+1111111
+1000001
+0000001
+100N001
+1000001
+1000001
+1111111
