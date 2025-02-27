@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cspreafi <cspreafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 22:50:19 by cspreafi          #+#    #+#             */
+/*   Updated: 2025/02/27 00:57:20 by cspreafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 int	get_size(t_cube *cube)
 {
-	if (tablen(cube->worldmap) - cube->start_map < 16)
+	if (map_len(cube->worldmap) - cube->start_map < 16)
 		return (16);
-	else if (tablen(cube->worldmap) - cube->start_map > 16
-		&& tablen(cube->worldmap) - cube->start_map <= 32)
+	else if (map_len(cube->worldmap) - cube->start_map > 16
+		&& map_len(cube->worldmap) - cube->start_map <= 32)
 		return (12);
-	else if (tablen(cube->worldmap) - cube->start_map > 32
-		&& tablen(cube->worldmap) - cube->start_map <= 64)
+	else if (map_len(cube->worldmap) - cube->start_map > 32
+		&& map_len(cube->worldmap) - cube->start_map <= 64)
 		return (10);
-	else if (tablen(cube->worldmap) - cube->start_map > 32)
+	else if (map_len(cube->worldmap) - cube->start_map > 32)
 		return (8);
 	return (12);
 }
@@ -39,24 +51,6 @@ void	draw_cube(t_cube *cube, int x, int y, int color)
 	}
 }
 
-void	animation_gest(t_cube *cube)
-{
-	static int	count;
-
-	if (count == 50)
-	{
-		count = 0;
-		anim_east(cube);
-		anim_south(cube);
-		anim_west(cube);
-		anim_north(cube);
-		if (cube->check_door == 1)
-			anim_door(cube);
-	}
-	else
-		count++;
-}
-
 int	draw_loop(t_cube *cube)
 {
 	int	x;
@@ -74,8 +68,6 @@ int	draw_loop(t_cube *cube)
 		x++;
 	}
 	free(cube->ray);
-	minimap(cube);
-	animation_gest(cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->img, 0, 0);
 	mlx_destroy_image(cube->mlx, cube->img);
 	return (0);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cspreafi <cspreafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 22:50:50 by cspreafi          #+#    #+#             */
+/*   Updated: 2025/02/27 00:56:58 by cspreafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 size_t	ft_strclen(char *s, char c)
@@ -49,7 +61,7 @@ int	check_color(t_cube *cube)
 
 	count = 0;
 	i = 0;
-	while (i < tablen(cube->worldmap))
+	while (i < map_len(cube->worldmap))
 	{
 		if (strncmp(cube->worldmap[i], "F", 1) == 0)
 		{

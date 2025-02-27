@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_convert.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cspreafi <cspreafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 22:51:00 by cspreafi          #+#    #+#             */
+/*   Updated: 2025/02/13 22:51:01 by cspreafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 int	ft_strcmp(char *s1, char *s2)
@@ -32,7 +44,7 @@ int	htoi(const char *s)
 	i = 0;
 	if (s == NULL || strlen(s) != 6)
 	{
-		printf("Invalid hex color format = %s\n", s);
+		printf("Invalid color format = %s\n", s);
 		return (-1);
 	}
 	while (i < 6)
@@ -40,7 +52,7 @@ int	htoi(const char *s)
 		hexval = char_convert(s[i]);
 		if (hexval == -1)
 		{
-			printf("Invalid hex character: %c\n", s[i]);
+			printf("Invalid hex %c\n", s[i]);
 			return (-1);
 		}
 		value = value * 16 + hexval;

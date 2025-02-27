@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cspreafi <cspreafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 22:50:30 by cspreafi          #+#    #+#             */
+/*   Updated: 2025/02/25 01:40:07 by cspreafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
-void	cast_ray4(t_cube *cube)
+void	calculate_wall_distance_and_line_height(t_cube *cube)
 {
 	if (cube->ray->side == 0)
 		cube->ray->perpwalldist = (cube->ray->sidedistx
@@ -17,7 +29,7 @@ void	cast_ray4(t_cube *cube)
 		cube->ray->drawend = SCREENHEIGHT - 1;
 }
 
-void	cast_ray3(t_cube *cube)
+void	march_ray_until_hit(t_cube *cube)
 {
 	while (cube->ray->hit == 0)
 	{
@@ -33,11 +45,11 @@ void	cast_ray3(t_cube *cube)
 			cube->ray->mapy += cube->ray->stepy;
 			cube->ray->side = 1;
 		}
-		cast_ray5(cube);
+		check_ray_collision_with_wall(cube);
 	}
 }
 
-void	cast_ray2(t_cube *cube)
+void	initialize_ray_steps_and_sidedist(t_cube *cube)
 {
 	if (cube->ray->raydirx < 0)
 	{
@@ -93,9 +105,9 @@ void	cast_ray(t_cube *cube, int x)
 	int			y;
 
 	init_raycast(x, cube);
-	cast_ray2(cube);
-	cast_ray3(cube);
-	cast_ray4(cube);
+	initialize_ray_steps_and_sidedist(cube);
+	march_ray_until_hit(cube);
+	calculate_wall_distance_and_line_height(cube);
 	if (cube->ray->side == 0)
 		wallx = cube->player->posy + cube->ray->perpwalldist
 			* cube->ray->raydiry;

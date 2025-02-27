@@ -1,7 +1,7 @@
-EA src/map/red_brick.xpm
-SO src/map/green_brick.xpm
-NO src/map/yellow_brick.xpm
-WE src/map/blue2_brick.xpm
+EA src/map/redbrick.xpm
+SO src/map/colorstone.xpm
+NO src/map/eagle.xpm
+WE src/map/wood.xpm
 
 C 12,2,40
 F 0,188,255

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkmap_symbols.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgerbaul <jgerbaul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 00:16:44 by jgerbaul          #+#    #+#             */
+/*   Updated: 2025/02/18 21:37:50 by jgerbaul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 int	check_symbols(t_cube *cube)
@@ -14,10 +26,9 @@ int	check_symbols(t_cube *cube)
 			if (cube->worldmap[y][x] != 'E' && cube->worldmap[y][x] != 'W'
 			&& cube->worldmap[y][x] != 'S' && cube->worldmap[y][x] != 'N'
 			&& cube->worldmap[y][x] != '1' && cube->worldmap[y][x] != '0'
-			&& cube->worldmap[y][x] != ' ' && cube->worldmap[y][x] != 'D'
-			&& cube->worldmap[y][x] != 'O')
+			&& cube->worldmap[y][x] != ' ')
 			{
-				printf("Error symbole - %d, %d [%c]\n", y,
+				printf("Error symbol %d %d [%c]\n", y,
 					x, cube->worldmap[y][x]);
 				return (ERROR);
 			}
@@ -66,27 +77,13 @@ int	check_zero(t_cube *cube, int y, int x, int tab_len)
 	return (VALID);
 }
 
-int	ft_check_door(t_cube *cube, int y, int x)
-{
-	if (cube->worldmap[y][x] == 'D')
-	{
-		if (!cube->worldmap[y][x + 1] || x - 1 == 0)
-			return (ERROR);
-		if (!cube->worldmap[y + 1])
-			return (ERROR);
-		if (y - 1 < cube->start_map)
-			return (ERROR);
-	}
-	return (VALID);
-}
-
 int	checkmap(t_cube *cube)
 {
 	int	x;
 	int	y;
 	int	tab_len;
 
-	tab_len = tablen(cube->worldmap);
+	tab_len = map_len(cube->worldmap);
 	y = cube->start_map;
 	if (check_tab(cube, y) != VALID)
 		return (ERROR);
@@ -98,8 +95,6 @@ int	checkmap(t_cube *cube)
 			if (check_zero(cube, y, x, tab_len) != VALID)
 				return (ERROR);
 			else if (check_space(cube, y, x) != VALID)
-				return (ERROR);
-			else if (ft_check_door(cube, y, x) != VALID)
 				return (ERROR);
 			x++;
 		}

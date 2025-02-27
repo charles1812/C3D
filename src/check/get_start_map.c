@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_start_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgerbaul <jgerbaul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 00:16:52 by jgerbaul          #+#    #+#             */
+/*   Updated: 2025/02/13 00:16:52 by jgerbaul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 int	get_start_map(t_cube *cube)
@@ -10,8 +22,6 @@ int	get_start_map(t_cube *cube)
 		if (ft_strncmp(cube->worldmap[i], "F", 1) == 0)
 			i++;
 		else if (ft_strncmp(cube->worldmap[i], "C", 1) == 0)
-			i++;
-		else if (ft_strncmp(cube->worldmap[i], "DO", 1) == 0)
 			i++;
 		else if (ft_strncmp(cube->worldmap[i], "WE", 2) == 0)
 			i++;

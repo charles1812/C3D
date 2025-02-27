@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   include.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cspreafi <cspreafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 00:14:55 by jgerbaul          #+#    #+#             */
+/*   Updated: 2025/02/27 01:10:02 by cspreafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INCLUDE_H
 # define INCLUDE_H
 
@@ -23,9 +35,6 @@
 # include <unistd.h>
 # include <limits.h>
 
-# include <sys/time.h> // to remove
-
-/* -- struct -- */
 typedef struct s_gc
 {
 	int				imp;
@@ -98,19 +107,10 @@ typedef struct s_cube
 	char		*we_tex_name;
 	int			fd_ea_tex;
 	char		*ea_tex_name;
-	int			fd_door_tex;
-	char		*door_tex_name;
 	int			color_c;
 	int			color_f;
 	int			texnum;
 	bool		loaded;
-	bool		mouse;
-	bool		check_door;
-	int			north_animation_frame;
-	int			south_animation_frame;
-	int			east_animation_frame;
-	int			west_animation_frame;
-	int			door_animation_frame;
 	int			size_map;
 	int			start_map;
 	int			half_screen;
@@ -120,7 +120,6 @@ typedef struct s_cube
 	t_texture	*texture1;
 	t_texture	*texture2;
 	t_texture	*texture3;
-	t_texture	*texture4;
 }				t_cube;
 
 void		*gc_alloc(size_t sz, int imp);
@@ -138,7 +137,7 @@ char		*get_next_line(int fd);
 char		**make_map(int fd);
 void		print_tab(char **av);
 void		free_tab(char **tab);
-int			tablen(char **tab);
+int			map_len(char **tab);
 void		color(t_raycast *ray, t_cube *cube);
 void		cast_ray(t_cube *cube, int x);
 int			draw_loop(t_cube *cube);
@@ -152,8 +151,7 @@ char		*ft_sstrndup(char *s, int n, int start, int imp);
 int			ctorgb(char *str);
 int			htoi(const char *s);
 int			get_color(char *s);
-int			ft_gest_exit(t_cube *cube);
-char		**build_map(int fd);
+int			ft_exit(t_cube *cube);
 void		dont_draw_line(t_cube *cube, int x, int y, int color);
 void		img_pix_put(t_cube *cube, int x, int y, int color);
 int			print_texture(t_cube *cube);
@@ -179,43 +177,29 @@ bool		check_west(t_cube *cube, char *str);
 bool		check_east(t_cube *cube, char *str);
 int			check_color(t_cube *cube);
 int			gest_mouse_mov(int x, int y, t_cube *cube);
-void		forward_doors(t_cube *cube);
-void		backward_doors(t_cube *cube);
-void		side_minus_doors(t_cube *cube);
-void		side_plus_doors(t_cube *cube);
+void		forward_wall(t_cube *cube);
+void		backward_wall(t_cube *cube);
+void		side_minus_wall(t_cube *cube);
+void		side_plus_wall(t_cube *cube);
 void		error_initmap_free(t_cube *cube, int ret);
 void		mov(t_cube *cube);
-void		cast_ray5(t_cube *cube);
+void		check_ray_collision_with_wall(t_cube *cube);
 void		draw_background(t_cube *cube, int y);
-bool		check_door_tex(t_cube *cube, char *str);
-int			check_door(t_cube *cube);
 int			get_player_pos(t_cube *cube);
-void		anim_south(t_cube *cube);
-void		anim_north(t_cube *cube);
-void		anim_east(t_cube *cube);
-void		anim_west(t_cube *cube);
-void		anim_door(t_cube *cube);
 int			check_height_texture(t_cube *cube);
 int			check_length_texture(t_cube *cube);
 int			check_texture_size(t_cube *cube);
-int			ft_gest_exit_windowless(t_cube *cube);
-void		minimap(t_cube *cube);
+int			ft_exit_windowless(t_cube *cube);
 void		draw_cube(t_cube *cube, int x, int y, int color);
-void		minimap_door(t_cube *cube, int y, int x);
 int			get_color_north(t_cube *cube, int y, int texx);
 int			get_color_south(t_cube *cube, int y, int texx);
 int			get_color_east(t_cube *cube, int y, int texx);
 int			get_color_west(t_cube *cube, int y, int texx);
-int			get_color_doors(t_cube *cube, int y, int texx);
-int			check_open_door(t_cube *cube);
-int			check_close_door(t_cube *cube);
-void		check_door_around(t_cube *cube);
 int			get_size(t_cube *cube);
 int			error_arg(void);
 t_texture	*load_xpm_texture(const char *filepath, t_cube *cube);
 t_texture	*load_xpm_texture1(const char *filepath, t_cube *cube);
 t_texture	*load_xpm_texture2(const char *filepath, t_cube *cube);
 t_texture	*load_xpm_texture3(const char *filepath, t_cube *cube);
-t_texture	*load_xpm_texture4(const char *filepath, t_cube *cube);
 
 #endif

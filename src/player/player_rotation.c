@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_rotation.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgerbaul <jgerbaul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 22:36:51 by jgerbaul          #+#    #+#             */
+/*   Updated: 2025/02/26 22:48:21 by jgerbaul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 void	rotation_plus(t_cube *cube, double olddirx, double oldplanex)
@@ -24,34 +36,6 @@ void	rotation_minus(t_cube *cube, double olddirx, double oldplanex)
 		+ cube->player->planey * cos(cube->player->rotspeed);
 }
 
-int	gest_mouse_mov(int x, int y, t_cube *cube)
-{
-	double	olddirx;
-	double	oldplanex;
-
-	(void)y;
-	olddirx = cube->player->dirx;
-	oldplanex = cube->player->planex;
-	if (cube->mouse == 1)
-	{
-		mlx_mouse_move(cube->mlx, cube->win, SCREENWIDTH / 2,
-			SCREENHEIGHT / 2 + SCREENHEIGHT / 4);
-		if (x > SCREENWIDTH / 2)
-		{
-			cube->player->rotspeed *= (x - SCREENWIDTH / 2);
-			rotation_plus(cube, olddirx, oldplanex);
-			cube->player->rotspeed /= (x - SCREENWIDTH / 2);
-		}
-		else if (x < SCREENWIDTH / 2)
-		{
-			cube->player->rotspeed *= ((x * -1) - (SCREENWIDTH / 2) * -1);
-			rotation_minus(cube, olddirx, oldplanex);
-			cube->player->rotspeed /= ((x * -1) - (SCREENWIDTH / 2) * -1);
-		}
-	}
-	return (0);
-}
-
 int	check_around_player(int x, int y, t_cube *cube)
 {
 	if (!cube->worldmap[y][x + 1] || cube->worldmap[y][x + 1] == ' ')
@@ -73,7 +57,7 @@ int	get_player_pos(t_cube *cube)
 
 	flag = false;
 	y = get_start_map(cube);
-	while (++y < tablen(cube->worldmap))
+	while (++y < map_len(cube->worldmap))
 	{
 		x = -1;
 		while (cube->worldmap[y][++x] && x < (int)ft_strlen(cube->worldmap[y]))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkmap.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgerbaul <jgerbaul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 00:16:48 by jgerbaul          #+#    #+#             */
+/*   Updated: 2025/02/22 01:07:04 by jgerbaul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 int	check_ext(char *s, int len)
@@ -18,7 +30,7 @@ int	check_ext(char *s, int len)
 		}
 		else
 		{
-			printf("Erreur Map, ./Cube3d <(addresse map).cub>\n");
+			printf("Map error ./Cube3d *.cub\n");
 			return (ERROR);
 		}
 	}
@@ -50,15 +62,15 @@ int	check_no_so(t_cube *cube)
 
 	count = 0;
 	i = 0;
-	while (i < tablen(cube->worldmap))
+	while (i < map_len(cube->worldmap))
 	{
-		if (strncmp(cube->worldmap[i], "NO", 2) == 0)
+		if (ft_strncmp(cube->worldmap[i], "NO", 2) == 0)
 		{
 			if (check_north(cube, cube->worldmap[i]) != true)
 				return (ERROR);
 			count++;
 		}
-		else if (strncmp(cube->worldmap[i], "SO", 2) == 0)
+		else if (ft_strncmp(cube->worldmap[i], "SO", 2) == 0)
 		{
 			if (check_south(cube, cube->worldmap[i]) != true)
 				return (ERROR);
@@ -78,15 +90,15 @@ int	check_ea_we(t_cube *cube)
 
 	count = 0;
 	i = 0;
-	while (i < tablen(cube->worldmap))
+	while (i < map_len(cube->worldmap))
 	{
-		if (strncmp(cube->worldmap[i], "EA", 2) == 00)
+		if (ft_strncmp(cube->worldmap[i], "EA", 2) == 0)
 		{
 			if (check_east(cube, cube->worldmap[i]) != true)
 				return (ERROR);
 			count++;
 		}
-		else if (strncmp(cube->worldmap[i], "WE", 2) == 0)
+		else if (ft_strncmp(cube->worldmap[i], "WE", 2) == 0)
 		{
 			if (check_west(cube, cube->worldmap[i]) != true)
 				return (ERROR);
@@ -101,11 +113,6 @@ int	check_ea_we(t_cube *cube)
 
 int	check_textures(t_cube *cube)
 {
-	if (cube->check_door == 1)
-	{
-		if (check_door(cube) == ERROR)
-			return (ERROR);
-	}
 	if (check_no_so(cube) == ERROR)
 		return (ERROR);
 	if (check_ea_we(cube) == ERROR)

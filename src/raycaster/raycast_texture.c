@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast_texture.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cspreafi <cspreafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 22:50:36 by cspreafi          #+#    #+#             */
+/*   Updated: 2025/02/13 22:50:37 by cspreafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include.h"
 
 int	get_color_side_zero(t_cube *cube, int y, int texx) // NO SO
@@ -35,8 +47,6 @@ void	get_color_texture(t_cube *cube, int y, int texx, int x)
 			else if (cube->ray->side == 1)
 				color = get_color_side_one(cube, y, texx);
 		}
-		else if (cube->worldmap[cube->ray->mapx][cube->ray->mapy] == 'D')
-			color = get_color_doors(cube, y, texx);
 		dont_draw_line(cube, x, y, color);
 		y++;
 	}
