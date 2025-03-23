@@ -1,0 +1,13 @@
+C 64,63,65
+F 33,31,32
+
+EA src/map/redbrick.xpm
+SO src/map/colorstone.xpm
+NO src/map/eagle.xpm
+WE src/map/wood.xpm
+
+1111111
+1000001
+100N001
+1000001
+1111111
